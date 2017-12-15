@@ -1,15 +1,31 @@
-
 {
-  "name"         : "todo-application",
-  "version"      : "0.0.0",
-  "description"  : "Simple todo application.",
-  "main"         : "server.js",
-  "author"       : "K3nnet",
-  "dependencies" : {
-    "express"    : "~4.7.2",
-    "mongoose"   : "~3.6.2",
-    "morgan"     : "~1.2.2",
-    "body-parser": "~1.5.2",
-    "method-override": "~2.1.2"
-    }
+  "name": "todo-app",
+  "version": "1.0.0",
+  "description": "simple todo app for Mog Moshabi services",
+  "main": "/server/server.js",
+  "dependencies": {
+    "angular": "^1.4.14",
+    "angular-animate": "^1.5.11",
+    "angular-aria": "^1.5.11",
+    "angular-cookies": "^1.5.11",
+    "angular-material": "^1.0.9",
+    "angular-messages": "^1.5.11",
+    "angular-mocks": "^1.5.11",
+    "angular-sanitize": "^1.5.11",
+    "cookie-parser": "^1.4.3",
+    "express-session": "^1.15.6",
+    "jquery": "^3.2.1",
+    "method-override": "^2.3.10",
+    "moment": "^2.14.1",
+    "mongodb": "^2.2.5",
+    "mongoose": "^4.5.8",
+    "path": "^0.12.7",
+    "satellizer": "^0.15.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "k3nnet",
+  "license": "ISC"
 }
