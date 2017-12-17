@@ -47,9 +47,16 @@ ul li {
     background-size: cover;
     background-position: top left;
     background-repeat: no-repeat;
+    overflow: hidden;
 }
 .top-bar{
     padding: 22px 8%;
+}
+.done{
+    background-color: greenyellow
+}
+.not-done{
+    background-color: #E91E63;
 }
 .logo{}
 .logo a{
@@ -84,21 +91,20 @@ nav ul li a{
     text-decoration: none !important;
 }
 .home-content{
-    padding: 9vh 20%;
+    padding: 2vh 20%;
 }
 .home-content h1{
     text-align: center;
     font-size: 60px;
     color: #ffffff;
-    padding-top: 12vh;
+    padding-top: 1vh;
 }
 .home-content p{
     text-align: center;
     padding-top: 4%;
 }
-.home-content a{
+.item{
     padding: 10px 8%;
-    background-color: #E91E63;
     color: #ffffff;
     font-size: 20px;
     text-decoration: none;
