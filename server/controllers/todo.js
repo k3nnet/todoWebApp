@@ -17,12 +17,12 @@ module.exports = {
     
     //create and send back all Todos
     create: function(req, res) {
-
+            console.log(req.body)
         // create a todo, information comes from AJAX request from Angular
         Todo.create({
             text : req.body.text,
-            status:req.body.status,
-            done : false
+            currentStatus:req.body.currentStatus,
+            state: req.body.state
         }, function(err, todo) {
             if (err)
                 res.send(err);

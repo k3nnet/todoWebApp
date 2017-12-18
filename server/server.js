@@ -37,6 +37,7 @@ app.get('/', function (req, res) {
 app.get('/api/todos',todo.getToDo);
 app.post('/api/todos',todo.create);
 app.delete('/api/todos/:todo_id',todo.remove);
+app.put('/api/todos/:todo_id',todo.update);
 
 
 // listen (start app with node server.js) ======================================

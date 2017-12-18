@@ -6,25 +6,29 @@ app.controller('mainController', function ($scope, $http) {
 
     var todoAddress = '/api/todos/';
     $scope.formData = {};
-    $scope.status = "";
+    $scope.style = {};
     $scope.todos = [];
 
     //get all todos
     $http.get(todoAddress).then(function (res) {
-        console.log(res.data);
-         
+       // console.log(res.data);
+
         for (var i = 0; i < res.data.length; i++) {
             var todo = res.data[i];
-            console.log(res.data);
-            var groupedTodo=group(todo);
-
+           // console.log(res.data);
+            var groupedTodo = group(todo);
+           console.log(groupedTodo );
             $scope.todos.push(groupedTodo);
         }
 
-        if (res.data.length < 5) {
-            $scope.pager = false;
-        }
         
+            if (res.data.length >= 4) {
+                $scope.pager = true;
+            }
+            else{
+                $scope.pager = false;
+            }
+
 
         return res.data;
     });
@@ -32,23 +36,29 @@ app.controller('mainController', function ($scope, $http) {
 
     //create a todo task
     $scope.createTodo = function (formData) {
-        formData.status = "NOT DONE";
+        formData.currentStatus = "DITSENELE";
+        formData.state = "Ditsenele"
+
+        console.log("form data :"+ JSON.stringify(formData))
 
         $http.post(todoAddress, formData).then(function (res) {
             $scope.formData = {};
 
-            $scope.todos=[];
-             for (var i = 0; i < res.data.length; i++) {
-            var todo = res.data[i];
-            var groupedTodo=group(todo);
-
+            $scope.todos = [];
+            for (var i = 0; i < res.data.length; i++) {
+                var todo = res.data[i];
+                 var groupedTodo = group(todo);
+           console.log(groupedTodo );
             $scope.todos.push(groupedTodo);
-        }
+            }
 
-        if (res.data.length < 5) {
-            $scope.pager = false;
-        }
-           
+            if (res.data.length >= 4) {
+                $scope.pager = true;
+            }
+            else{
+                $scope.pager = false;
+            }
+
             return res.data;
         });
     }
@@ -58,36 +68,109 @@ app.controller('mainController', function ($scope, $http) {
     //grouping function 
 
     var group = function (todo) {
-        if (todo.status === "DONE") {
-            todo.class = "done";
+        if (todo.currentStatus === "DONE") {
+            console.log(todo);
+               todo.style={
+                    "background-color":"greenyellow"
+                }
+            
+        } else if (todo.currentStatus === "DITSENELE") {
+             todo.style={
+                    "background-color":"#E91E63"
+                }
+
 
             console.log(todo);
-        } else if (todo.status === "NOT DONE") {
-            todo.class = "not-done";
-            console.log(todo);
+        } else if (todo.currentStatus === "IN PROGRESS") {
+            todo.style={
+                    "background-color":"yellow"
+                }
+          
         }
 
         return todo;
     }
 
+    $scope.update = function (todo) {
+        console.log(todo);
+        if (todo.state === "Ditsenele") {
+            
+
+            var id=todo._id;
+
+            todo.state = "Done";
+            todo.currentStatus = "IN PROGRESS"
+             todo.style={
+                    "background-color":"yellow"
+                }
+          
+            console.log(todo);
+
+
+
+            $http.put(todoAddress + id,todo).then(function (res) {
+                console.log(res.data);
+                
+                return res.data;
+            });
+
+
+            // deleteTodo(todo._id);
+
+
+
+
+
+        }
+        else if (todo.currentStatus === "IN PROGRESS") {
+            var id=todo._id;
+            
+            console.log(todo.state);
+            todo.state = "Remove";
+            todo.currentStatus = "DONE";
+                todo.style={
+                    "background-color":"greenyellow"
+                }
+          
+
+              $http.put(todoAddress + id,todo).then(function (res) {
+                console.log(res.data);
+                
+                return res.data;
+            });
+            
+        } else if (todo.currentStatus === "DONE") {
+            
+            console.log(todo.state);
+            todo.state = "complete";
+            todo.currentStatus = "REMOVED"
+            deleteTodo(todo._id);
+        }
+
+    }
+
+
+
 
     //delete a todo task
-    $scope.deleteTodo = function (id) {
+    var deleteTodo = function (id) {
         console.log(id);
 
+
+
         $http.delete(todoAddress + id).then(function (res) {
-            $scope.todos=[];
-             for (var i = 0; i < res.data.length; i++) {
-            var todo = res.data[i];
-            var groupedTodo=group(todo);
+            $scope.todos = [];
+            for (var i = 0; i < res.data.length; i++) {
+                var todo = res.data[i];
+                var groupedTodo = group(todo);
 
-            $scope.todos.push(groupedTodo);
-        }
+                $scope.todos.push(groupedTodo);
+            }
 
-        if (res.data.length < 5) {
-            $scope.pager = false;
-        }
-           
+            if (res.data.length < 5) {
+                $scope.pager = false;
+            }
+
             console.log(res.data);
             return res.data;
         });

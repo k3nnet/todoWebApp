@@ -2,5 +2,6 @@ var mongoose=require('mongoose');
 
 module.exports=mongoose.model('Todo',{
     text:String,
-    status:String
+    currentStatus:String,
+    state:String
 });
