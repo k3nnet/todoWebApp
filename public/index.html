@@ -48,11 +48,11 @@
 </head>
 <!-- SET THE CONTROLLER AND GET ALL TODOS -->
 
-<body ng-controller="mainController">
+<body ng-cloak ng-controller="mainController">
     <div class="home">
         <div class="top-bar">
             <div class="logo">
-                <a href="#"><span>Mog</span>Moshabi</a>
+                <a href="#"><span>Mog</span>Moshabi Services</a>
             </div>
             
    
@@ -67,7 +67,7 @@
 
                 <h1 class="list-group-item-heading">TODO</h1>
                 
-                <ul ng-repeat="todo in todos|limitTo:5|orderBy:'state'">
+                <ul ng-repeat="todo in todos|limitTo:10|orderBy:'state'">
                     <li ng-click="update(todo)" ng-style="todo.style"  class="item">
                         
                             {{ todo.text }}
