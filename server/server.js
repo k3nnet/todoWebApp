@@ -2,11 +2,12 @@
 var express = require('express');
 var app = express();
 var mongoose = require('mongoose');
-var morgan = require('morgan');
+
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var config=require('./config');
 var todo=require('./controllers/todo');
+var auth=require('./controllers/auth');
 var publicPath 	= '/../public/';
 var path=require('path');
 
@@ -15,7 +16,7 @@ var path=require('path');
 mongoose.connect(config.database);
 
 app.use(express.static(__dirname + '/public'));                 
-app.use(morgan('dev'));                                         
+                                        
 app.use(bodyParser.urlencoded({ 'extended': 'true' }));          
 app.use(bodyParser.json());                                     
 app.use(bodyParser.json({ type: 'application/vnd.api+json' })); 
@@ -32,6 +33,10 @@ app.get('/', function (req, res) {
 })
 
 
+//api routes==================================
+
+app.post('/auth/login',auth.login)
+app.post('/auth/register',auth.register);
 
 //api routes==================================
 app.get('/api/todos',todo.getToDo);
