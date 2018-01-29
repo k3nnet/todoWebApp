@@ -35,7 +35,8 @@ app.get('/', function (req, res) {
 
 //api routes==================================
 
-app.post('/auth/login',auth.login)
+app.post('/auth/login',auth.login);
+app.get('/auth/logout',auth.logout);
 app.post('/auth/register',auth.register);
 
 //api routes==================================

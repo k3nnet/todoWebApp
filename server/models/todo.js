@@ -3,5 +3,6 @@ var mongoose=require('mongoose');
 module.exports=mongoose.model('Todo',{
     text:String,
     currentStatus:String,
-    state:String
+    state:String,
+    runner:String
 });

@@ -31,6 +31,12 @@ module.exports =
 
         },
 
+        logout:function(req,res){
+
+            res.json({ success: true, message: 'logout' });
+
+        },
+
         login: function (req, res) {
             console.log(req.body.params)
 
@@ -53,7 +59,8 @@ module.exports =
                         res.json({
                             success: true,
                             message: 'Enjoy your token!',
-                            token: token
+                            token: token,
+                            user:user
                         })
 
 
