@@ -1,8 +1,24 @@
 var app = angular.module('Todo', [
+    'ui.router',
+    'ngCookies'
 ]);
 
+app.run(['$rootScope','$state','$cookieStore','Auth',function($rootScope,$state,$cookieStore,Auth){
 
-app.controller('mainController', function ($scope, $http) {
+    $rootScope.$on('$stateChangeError',function(event,toState,toParams,fromState,fromParams,error){
+        console.log(error)
+        if(error.unAuthorized){
+            $state.go('login');
+        }else if(error.authorized){
+          $state.go('home');
+        }
+    })
+
+    Auth.user=$cookieStore.get('user');
+}]);
+
+
+app.controller('MainController', function ($scope, $http) {
 
     var todoAddress = '/api/todos/';
     $scope.formData = {};
@@ -178,5 +194,32 @@ app.controller('mainController', function ($scope, $http) {
 
 
 
+
+});
+
+app.controller('LoginController',function(Auth,$scope,$state){
+
+   
+    $scope.user={}
+    $scope.buttonText="Login";
+    $scope.login=function(user){
+        $scope.buttonText="Loggin..";
+
+        Auth.login(user).then(function(results){
+            console.log(results)
+
+            if(results.success){
+              $state.go('home');
+              $scope.buttonText="Login";
+            }
+            else{
+                 $scope.invalidLogin=true;
+                 $scope.message=results.message;
+                  $scope.buttonText="Login";
+            }
+       
+           
+        });
+    }
 
 })

@@ -1,0 +1,66 @@
+<div class="home">
+        <div class="top-bar">
+            <div class="logo">
+                <a href="#"><span>Mog</span>Moshabi Services</a>
+            </div>
+            
+   
+          
+      
+          
+
+        </div>
+        <!--end of top bar-->
+        <div class="w3-row">
+            <div class="home-content">
+
+                <h1 class="list-group-item-heading">TODO</h1>
+                
+                <ul ng-repeat="todo in todos|limitTo:10|orderBy:'state'">
+                    <li ng-click="update(todo)" ng-style="todo.style"  class="item">
+                        
+                            {{ todo.text }}
+                            <span class="w3-small">{{todo.currentStatus}}</span>
+                        
+                       <span ng-click="deleteTodo(todo._id)" class="badge pull-right"> <a href="#">{{todo.state}}</a></span>
+                    </li>
+
+
+                </ul>
+                <ul ng-show="pager" class="pager">
+
+                    <li class="next"><a href="#">more &rarr;</a></li>
+                </ul>
+          
+            </div>
+
+
+        </div>
+        <!--end of home content-->
+    </div>
+    <div class="container">
+
+        <!-- HEADER AND TODO COUNT -->
+        <div class="jumbotron text-center">
+            <h1>What needs to get DONE <span class="label label-info">{{ todos.length }}</span></h1>
+        </div>
+
+
+
+        <!-- FORM TO CREATE TODOS -->
+        <div id="todo-form" class="row">
+            <div class="col-sm-8 col-sm-offset-2 text-center">
+                <form>
+                    <div class="form-group">
+
+                        <!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
+                        <input type="text" class="form-control input-lg text-center" placeholder="list what needs to get done" ng-model="formData.text">
+                    </div>
+
+                    <!-- createToDo() WILL CREATE NEW TODOS -->
+                    <button type="submit" class="btn btn-primary btn-lg" ng-click="createTodo(formData)">Add</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
