@@ -2,10 +2,10 @@ var Todo = require('../models/todo');
 var async = require('async')
 module.exports = {
     //get all  Todos
-    getToDo:function(req, res) {
+    getToDo: function (req, res) {
 
         // use mongoose to get all todos in the database
-        Todo.find(function(err, todos) {
+        Todo.find(function (err, todos) {
 
             // if there is an error retrieving, send the error. nothing after res.send(err) will execute
             if (err)
@@ -13,22 +13,22 @@ module.exports = {
 
             res.json(todos); // return all todos in JSON format
         });
-    }, 
-    
+    },
+
     //create and send back all Todos
-    create: function(req, res) {
-            console.log(req.body)
+    create: function (req, res) {
+        console.log(req.body)
         // create a todo, information comes from AJAX request from Angular
         Todo.create({
-            text : req.body.text,
-            currentStatus:req.body.currentStatus,
+            text: req.body.text,
+            currentStatus: req.body.currentStatus,
             state: req.body.state
-        }, function(err, todo) {
+        }, function (err, todo) {
             if (err)
                 res.send(err);
 
             // get and return all the todos after you create another
-            Todo.find(function(err, todos) {
+            Todo.find(function (err, todos) {
                 if (err)
                     res.send(err)
                 res.json(todos);
@@ -45,36 +45,46 @@ module.exports = {
         else {
             Todo.find({ _id: req.params.productId }).exec(function (err, result) {
 
-            res.send(result);
+                res.send(result);
 
-        });
+            });
         }
     },//update Todo product
-    update:function(req,res){
+    update: function (req, res) {
         var productId = req.body._id;
         console.log(req.body);
-          var product = new Todo(req.body);
-          Todo.update({ _id: productId },{$set:req.body},{multi:false}).exec(function(err,results){
-              res.send(results);
-          });
+        var product = new Todo(req.body);
+        Todo.update({ _id: productId }, { $set: req.body }, { multi: false }).exec(function (err, results) {
+            res.send(results);
+        });
 
     },//remove a todo 
-    remove:function(req, res) {
-        Todo.remove({
-            _id : req.params.todo_id
-        }, function(err, todo) {
-            if (err)
-                res.send(err);
+    remove: function (req, res) {
+        console.log(req.params);
 
-            // get and return all the todos after you create another
-            Todo.find(function(err, todos) {
-                if (err)
-                    res.send(err)
-                res.json(todos);
-            });
-        });
+        Todo.remove({ _id: req.params.todo_id }, function (err, numRemoved) {
+            if (err) {
+                res.status(500).send(err)
+            }
+            else {
+
+
+                // get and return all the todos after you create another
+                Todo.find(function (err, todos) {
+                    if (err) {
+                        res.send(err)
+                    }
+                    else {
+                        res.json(todos);
+                       // res.sendStatus(200)
+                    }
+
+                });
+            }
+        })
+
     }
-   
+
 
 
 

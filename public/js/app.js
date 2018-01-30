@@ -79,7 +79,13 @@ app.controller('MainController', function ($scope, $cookieStore, Auth, $http, $s
 
         
         
-        ToDoService.updateTodo(todo,user);
+        ToDoService.updateTodo(todo,user).then(function(results){
+        
+            if(results instanceof Array){
+               $scope.todos = results;
+            }
+           
+        });
 
 
     }
@@ -90,7 +96,9 @@ app.controller('MainController', function ($scope, $cookieStore, Auth, $http, $s
     //delete a todo task
 
     $scope.deleteTodo=function (todo) {
-        ToDoService.deleteTodo(todo)
+        ToDoService.deleteTodo(todo).then(function(results){
+            console.log("here");
+        })
     }
 
 

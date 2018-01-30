@@ -117,7 +117,7 @@ app.factory('ToDoService', ['$http', function ($http) {
         if (todo.currentStatus === "DONE") {
             console.log(todo);
                todo.style={
-                    "background-color":"greenyellow"
+                   "background-color":"yellow"
                 }
             
         } else if (todo.currentStatus === "DITSENELE") {
@@ -129,7 +129,8 @@ app.factory('ToDoService', ['$http', function ($http) {
             console.log(todo);
         } else if (todo.currentStatus === "IN PROGRESS") {
             todo.style={
-                    "background-color":"yellow"
+                    
+                     "background-color":"greenyellow"
                 }
           
         }
@@ -153,14 +154,14 @@ app.factory('ToDoService', ['$http', function ($http) {
             todo.currentStatus = "IN PROGRESS";
             todo.runner=user.name;
             todo.style = {
-                "background-color": "yellow"
+                  "background-color":"greenyellow"
             }
 
             console.log(todo);
 
 
 
-            $http.put(todoAddress + id, todo).then(function (res) {
+          return  $http.put(todoAddress + id, todo).then(function (res) {
                 console.log(res.data);
 
                 return res.data;
@@ -181,22 +182,23 @@ app.factory('ToDoService', ['$http', function ($http) {
             todo.state = "Remove";
             todo.currentStatus = "DONE";
             todo.style = {
-                "background-color": "greenyellow"
+                "background-color": "yellow"
             }
 
 
-            $http.put(todoAddress + id, todo).then(function (res) {
+           return $http.put(todoAddress + id, todo).then(function (res) {
                 console.log(res.data);
 
                 return res.data;
             });
 
         } else if (todo.currentStatus === "DONE") {
+            console.log("here delete");
 
-            console.log(todo.state);
-            todo.state = "complete";
-            todo.currentStatus = "REMOVED"
-            deleteTodo(todo._id);
+           return deleteTodo(todo).then(function(results){
+                console.log("here");
+                return results;
+            });
         }
 
     }
@@ -205,9 +207,13 @@ app.factory('ToDoService', ['$http', function ($http) {
     //remove todo from list
     function deleteTodo(todo){
 
+
         var id=todo._id;
+
+        console.log(id);
         
-         $http.delete(todoAddress + id).then(function (res) {
+        return $http.delete(todoAddress + id).then(function (res) {
+             console.log(res);
             var todos = [];
             for (var i = 0; i < res.data.length; i++) {
                 var todo = res.data[i];
@@ -220,7 +226,7 @@ app.factory('ToDoService', ['$http', function ($http) {
                // $scope.pager = false;
             }
 
-            console.log(res.data);
+            console.log(todos);
             return todos;
         });
     

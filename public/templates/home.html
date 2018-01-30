@@ -19,10 +19,10 @@
 
             <ul ng-repeat="todo in todos|limitTo:10|orderBy:'state'">
                 <li ng-click="update(todo)" ng-style="todo.style" class="item">
-                    <div> <h4>{{ todo.text }} <span class="w3-small pull-right">{{todo.runner}}</span></h4>
+                    <div> <h4>{{ todo.text }} <span class="w3-large pull-right">{{todo.runner}}</span></h4>
                         <span class="w3-small">{{todo.currentStatus}}</span>
 
-                        <span ng-click="deleteTodo(todo)" class="badge pull-right"><a href="#">{{todo.state}}</a>
+                        <span  class="badge pull-right"><a href="#">{{todo.state}}</a>
                         </span>
                         
 
