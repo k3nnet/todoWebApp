@@ -195,10 +195,10 @@ app.factory('ToDoService', ['$http', function ($http) {
         } else if (todo.currentStatus === "DONE") {
             console.log("here delete");
 
-           return deleteTodo(todo).then(function(results){
+          /* return deleteTodo(todo).then(function(results){
                 console.log("here");
                 return results;
-            });
+            });*/
         }
 
     }
