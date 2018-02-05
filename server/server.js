@@ -10,6 +10,7 @@ var todo=require('./controllers/todo');
 var auth=require('./controllers/auth');
 var publicPath 	= '/../public/';
 var path=require('path');
+var cors=require('./cors');
 
 
 //configuration ================
@@ -23,6 +24,7 @@ app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
 app.use(methodOverride());
 
 
+app.use(cors);
 //public routes
 app.use(express.static(path.resolve(__dirname + publicPath)))
 app.use(express.static(path.resolve(__dirname + '/../bower_components')))
