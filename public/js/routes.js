@@ -24,6 +24,10 @@ app.config(function($stateProvider,$urlRouterProvider){
         },
         templateUrl:'templates/login.html',
         controller:'LoginController'
+    }).state('moreDetails',{
+       url:'/moreDetails/:id',
+        templateUrl:'/templates/moreDetails.html',
+        controller:'MoreDetailsController'
     });
     
     $urlRouterProvider.otherwise('/');

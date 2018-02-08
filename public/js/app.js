@@ -133,3 +133,20 @@ app.controller('LoginController', function (Auth, $scope, $state) {
     }
 
 })
+
+app.controller('MoreDetailsController',function($stateParams,ToDoService,$scope){
+
+    console.log($stateParams)
+    var id=$stateParams.id;
+
+     ToDoService.getTodoById(id).then(function(results){
+         
+         console.log(results)
+         $scope.singlePost=results[0];
+     });
+    
+
+    $scope.closeTodo=function(id){
+        $state.go('home')
+    }
+})

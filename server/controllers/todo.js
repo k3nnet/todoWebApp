@@ -3,7 +3,7 @@ var async = require('async')
 module.exports = {
     //get all  Todos
     getToDo: function (req, res) {
-
+         console.log(req.body);
         // use mongoose to get all todos in the database
         Todo.find(function (err, todos) {
 
@@ -36,25 +36,25 @@ module.exports = {
         });
 
     },
-    //get Todo product by id
-    getProduct: function (req, res) {
+    //get Todo  by id
+    getById: function (req, res) {
         console.log(req.body);
-        if (!req.params.productId) {
+        if (!req.params.todoId) {
             res.status(500).send('ID field is required.')
         }
         else {
-            Todo.find({ _id: req.params.productId }).exec(function (err, result) {
+            Todo.find({ _id: req.params.todoId }).exec(function (err, result) {
 
                 res.send(result);
 
             });
         }
-    },//update Todo product
+    },//update Todo 
     update: function (req, res) {
-        var productId = req.body._id;
+        var todoId = req.body._id;
         console.log(req.body);
-        var product = new Todo(req.body);
-        Todo.update({ _id: productId }, { $set: req.body }, { multi: false }).exec(function (err, results) {
+        var todo = new Todo(req.body);
+        Todo.update({ _id: todoId }, { $set: req.body }, { multi: false }).exec(function (err, results) {
             res.send(results);
         });
 

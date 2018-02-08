@@ -4,5 +4,8 @@ module.exports=mongoose.model('Todo',{
     text:String,
     currentStatus:String,
     state:String,
-    runner:String
+    runner:String,
+    feedback:{
+        type:Object
+    }
 });

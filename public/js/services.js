@@ -45,6 +45,7 @@ app.factory('ToDoService', ['$http', function ($http) {
 
         getAllTodos: getAllTodos,
         createTodo: createTodo,
+        getTodoById:getTodoById,
         deleteTodo: deleteTodo,
         updateTodo: updateTodo,
 
@@ -73,6 +74,19 @@ app.factory('ToDoService', ['$http', function ($http) {
             return todos;
         });
 
+    }
+
+    
+
+    //get a specific Todo by Id
+
+    function getTodoById(id) {
+        console.log(id);
+        return $http.get(todoAddress+'todo/'+id).then(function (res) {
+              console.log(JSON.stringify(res.data));
+            return res.data;
+            
+        })
     }
 
 
