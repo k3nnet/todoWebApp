@@ -1,4 +1,5 @@
 var Todo = require('../models/todo');
+var DoneTodos=require('../models/done_todos')
 var async = require('async')
 module.exports = {
     //get all  Todos
@@ -72,7 +73,9 @@ module.exports = {
             else {
 
 
-                // get and return all the todos after you create another
+
+
+                // get and return all the todos after you remove
                 Todo.find(function (err, todos) {
                     if (err) {
                         res.send(err)
@@ -85,6 +88,15 @@ module.exports = {
                 });
             }
         })
+
+    },
+
+    done:function(req,res){
+
+        var done=new DoneTodos(req.body);
+        done.closedDate=new Date();
+
+        done.save();
 
     }
 

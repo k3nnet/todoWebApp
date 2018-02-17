@@ -211,10 +211,10 @@ app.factory('ToDoService', ['$http', function ($http) {
         } else if (todo.currentStatus === "DONE") {
             console.log("here delete");
 
-          /* return deleteTodo(todo).then(function(results){
+          return deleteTodo(todo).then(function(results){
                 console.log("here");
                 return results;
-            });*/
+            });
         }
 
     }
@@ -231,6 +231,14 @@ app.factory('ToDoService', ['$http', function ($http) {
         return $http.delete(todoAddress + id).then(function (res) {
              console.log(res);
             var todos = [];
+
+              $http.post('/api/done/', todo).then(function (res) {
+                
+                console.log(res.data);
+
+            
+            });
+
             for (var i = 0; i < res.data.length; i++) {
                 var todo = res.data[i];
                 var groupedTodo = group(todo);

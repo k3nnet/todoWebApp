@@ -48,6 +48,8 @@ app.post('/api/todos',todo.create);
 app.delete('/api/todos/:todo_id',todo.remove);
 app.put('/api/todos/:todo_id',todo.update);
 
+app.post('/api/done',todo.done);
+
 
 // listen (start app with node server.js) ======================================
 app.listen(2000);
