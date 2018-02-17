@@ -5,7 +5,10 @@ module.exports=mongoose.model('Todo',{
     currentStatus:String,
     state:String,
     runner:String,
-    feedback:{
+    feedbacks:{
+        type:Object
+    },
+    subTasks:{
         type:Object
     }
 });

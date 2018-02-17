@@ -56,7 +56,10 @@ ul li {
     background-color: greenyellow
 }
 
-.logo{}
+.badge{
+
+    margin:1px 2%;
+}
 .logo a{
     font-size: 35px;
     letter-spacing: 3px;

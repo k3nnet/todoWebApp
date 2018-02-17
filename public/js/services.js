@@ -48,6 +48,7 @@ app.factory('ToDoService', ['$http', function ($http) {
         getTodoById:getTodoById,
         deleteTodo: deleteTodo,
         updateTodo: updateTodo,
+        update:update
 
     }
 
@@ -82,7 +83,7 @@ app.factory('ToDoService', ['$http', function ($http) {
 
     function getTodoById(id) {
         console.log(id);
-        return $http.get(todoAddress+'todo/'+id).then(function (res) {
+        return $http.get(todoAddress+id).then(function (res) {
               console.log(JSON.stringify(res.data));
             return res.data;
             
@@ -154,6 +155,15 @@ app.factory('ToDoService', ['$http', function ($http) {
 
     //update todo
 
+    function update(todo){
+        return $http.put(todoAddress +todo._id, todo).then(function (res) {
+                console.log(res.data);
+
+                return res.data;
+            });
+
+    }
+
     function updateTodo(todo,user) {
 
         console.log(todo);
@@ -180,14 +190,6 @@ app.factory('ToDoService', ['$http', function ($http) {
 
                 return res.data;
             });
-
-
-
-
-
-
-
-
         }
         else if (todo.currentStatus === "IN PROGRESS") {
             var id = todo._id;

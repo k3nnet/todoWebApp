@@ -1,0 +1,47 @@
+
+
+<!-- Modal -->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-10 col-md-8 panel">
+      <div class="panel-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">{{todo.text}}</h4>
+      </div>
+      <div class="panel-body">
+       
+        <form class="form-horizontal" 
+        	name="addsubtaskForm" 
+        	ng-submit="addsubtaskForm.$valid && add(subtask)">
+
+    			<div class="form-group" ng-class="{ 'has-error': addsubtaskForm.price.$error.required }">
+    				<label class="col-md-2 lead" for="price">Price</label>
+    				<div class="col-md-8 input-group">
+    					<div class="input-group-addon">R</div>
+    					<input type="text" class="form-control" name="subtask" ng-model="subtask.text" required/>
+    				</div>
+    			</div>	
+
+    			<p class="text-danger" ng-show="addsubtaskForm.price.$error.required">Enter price for item.</p>
+
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="food">Is it food?</label>  
+            <div class="col-md-4">
+              <input 
+                name="food" 
+                class="form-control"
+                type="checkbox"
+                ng-model="subtask.food"> 
+            </div>
+          </div>
+          
+    		</form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" ng-click="addsubtaskForm.$valid && add()">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -42,7 +42,7 @@ app.get('/auth/logout',auth.logout);
 app.post('/auth/register',auth.register);
 
 //api routes==================================
-app.get('/api/todos/todo:id',todo.getById);
+app.get('/api/todos/:id',todo.getById);
 app.get('/api/todos',todo.getToDo);
 app.post('/api/todos',todo.create);
 app.delete('/api/todos/:todo_id',todo.remove);

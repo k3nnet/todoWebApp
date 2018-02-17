@@ -18,32 +18,35 @@ module.exports = {
     //create and send back all Todos
     create: function (req, res) {
         console.log(req.body)
-        // create a todo, information comes from AJAX request from Angular
-        Todo.create({
-            text: req.body.text,
-            currentStatus: req.body.currentStatus,
-            state: req.body.state
-        }, function (err, todo) {
-            if (err)
-                res.send(err);
+        var todo=new Todo(req.body);
+       todo.createdDate=new Date();
+       todo.subTasks=[];
+       todo.feedbacks=[];
+
+       todo.save(function(){
 
             // get and return all the todos after you create another
             Todo.find(function (err, todos) {
                 if (err)
                     res.send(err)
                 res.json(todos);
+                // res.status(200).send("success");
+        
             });
-        });
+
+       })
+      
+     
 
     },
     //get Todo  by id
     getById: function (req, res) {
         console.log(req.body);
-        if (!req.params.todoId) {
+        if (!req.params.id) {
             res.status(500).send('ID field is required.')
         }
         else {
-            Todo.find({ _id: req.params.todoId }).exec(function (err, result) {
+            Todo.find({ _id: req.params.id }).exec(function (err, result) {
 
                 res.send(result);
 

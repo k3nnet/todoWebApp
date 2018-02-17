@@ -28,6 +28,10 @@ app.config(function($stateProvider,$urlRouterProvider){
        url:'/moreDetails/:id',
         templateUrl:'/templates/moreDetails.html',
         controller:'MoreDetailsController'
+    }).state('addsubTask',{
+       url:'/addsubTask/:id',
+        templateUrl:'/templates/subtask.html',
+        controller:'SubtaskController'
     });
     
     $urlRouterProvider.otherwise('/');

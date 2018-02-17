@@ -1,0 +1,12 @@
+<div class="row">
+    <div class="col-xs-8 col-xs-offset-2">
+    <span class="pull-right cross-btn" ng-click="closePost()">x</span>
+    <h1>{{singleTodo.text}}</h1>
+    <h5>Taken by:{{singleTodo.runner}}|{{singleTodo.currentStatus}}</h5>
+    
+
+    <div class="feedbacks">
+        <feedbacks todo="singleTodo"></feedbacks>
+    </div>
+    </div> 
+</div>

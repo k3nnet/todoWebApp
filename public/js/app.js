@@ -141,12 +141,31 @@ app.controller('MoreDetailsController',function($stateParams,ToDoService,$scope)
 
      ToDoService.getTodoById(id).then(function(results){
          
-         console.log(results)
-         $scope.singlePost=results[0];
+         console.log(results[0])
+         $scope.singleTodo=results[0];
      });
     
 
     $scope.closeTodo=function(id){
         $state.go('home')
     }
+})
+
+app.controller('SubtaskController',function(ToDoService,$scope,$stateParams){
+
+    var id=$stateParams.id
+
+       ToDoService.getTodoById(id).then(function(results){
+         
+         console.log(results[0])
+         $scope.todo=results[0];
+     });
+
+
+
+    
+
+
+
+
 })

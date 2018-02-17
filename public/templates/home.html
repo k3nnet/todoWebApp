@@ -18,13 +18,17 @@
             <h1 class="list-group-item-heading">TODO</h1>
 
             <ul ng-repeat="todo in todos|limitTo:10|orderBy:'state'">
-                <li ng-click="update(todo)" ng-style="todo.style" class="item">
+                <li  ng-style="todo.style" class="item">
                     <div> <h4>{{ todo.text }} <span class="w3-large pull-right">{{todo.runner}}</span></h4>
                         <span class="w3-small">{{todo.currentStatus}}</span>
 
-                        <span  class="badge pull-right"><a href="#">{{todo.state}}</a>
+                        
+                         <span  class="badge pull-right"><a ui-sref="addsubTask({id:todo._id})">Add subtask</a>
                         </span>
-                         <span  class="badge pull-right"><a ui-sref="moreDetails({id:todo._id})">more info</a>
+
+                        <span  class="badge pull-right"><a ui-sref="moreDetails({id:todo._id})"><i class="fa fa-info"></i><a href="#"></a>
+                        </span> 
+                        <span ng-click="update(todo)"  class="badge pull-right"> {{todo.state}}</a>
                         </span>
                         
 
