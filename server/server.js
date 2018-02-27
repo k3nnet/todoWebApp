@@ -52,5 +52,10 @@ app.post('/api/done',todo.done);
 
 
 // listen (start app with node server.js) ======================================
-app.listen(2000);
-console.log("App listening on port 2000");
+
+var server=app.listen(2000,function(){
+
+	var port=server.address().port;
+	var host=server.address().address;
+	console.log("App listening on http://%s:%s",port,host);
+});

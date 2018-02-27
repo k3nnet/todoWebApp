@@ -17,7 +17,7 @@
         <div class="home-content >
             <div class="card-columns" ng-repeat="todo in todos|limitTo:10|orderBy:'state'">
             
-                <!-- Example Social Card-->
+          
                 <div class="item card mb-3">
                   
                     <div class="card-body">
@@ -33,7 +33,7 @@
                         <a class="mr-3 d-inline-block" ui-sref="moreDetails({id:todo._id})">
                             <i class="fa fa-fw fa-comment"></i>Feedback</a>
                         <a class="d-inline-block" >
-                            <i class="fa fa-fw fa-share"></i>{{todo.currentStatus}}</a>
+                           {{todo.currentStatus}}</a>
                     </div>
                      <div  ng-click="update(todo)" class="card-footer small text-muted"><a href="#"><button ng-style="todo.style" class="btn btn-lg btn-block ">{{todo.state}}</button></a></div>
                    
