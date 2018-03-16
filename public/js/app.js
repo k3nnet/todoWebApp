@@ -1,6 +1,7 @@
 var app = angular.module('Todo', [
     'ui.router',
-    'ngCookies'
+    'ngCookies',
+    'ngAnimate'
 ]);
 
 app.run(['$rootScope', '$state', '$cookieStore', 'Auth', function ($rootScope, $state, $cookieStore, Auth) {
