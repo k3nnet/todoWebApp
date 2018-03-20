@@ -45,7 +45,8 @@ app.controller('MainController', function ($scope, $cookieStore, Auth, $http, $s
 
 
     $scope.createTodo = function (todo) {
-
+         console.log(todo);
+         
         ToDoService.createTodo(todo).then(function (results) {
               $scope.todos = results;
               $scope.formData={};

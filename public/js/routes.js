@@ -10,7 +10,8 @@ app.config(function($stateProvider,$urlRouterProvider){
           }]
         },
         templateUrl:'templates/home.html',
-        controller:'MainController'
+        controller:'MainController',
+        controllerAs:'MainController'
     }).state('login',{
         url:'/',
         resolve:{
@@ -20,7 +21,7 @@ app.config(function($stateProvider,$urlRouterProvider){
               return $q.reject({authorized:true});
             }
 
-          }]
+          }]  
         },
         templateUrl:'templates/login.html',
         controller:'LoginController'

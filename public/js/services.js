@@ -36,7 +36,6 @@ app.factory('Auth', ['$http', '$cookieStore', function ($http, $cookieStore) {
 
     return auth;
 }]);
-
 app.factory('ToDoService', ['$http', function ($http) {
     var todoAddress = '/api/todos/';
 

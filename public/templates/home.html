@@ -1,5 +1,6 @@
 <div class="section section-basic">
     <div class="container">
+      
         <div class="title">
             <h2>Incomplete Tasks</h2>
         </div>
@@ -14,15 +15,13 @@
                             <h4>{{todo.runner}}</h4>
                             <p>{{todo.text}}</p>
                             <div class="content">
-                                <a href="#pablo" class="btn btn-simple btn-just-icon">
+                                <a ui-sref="moreDetails" class="btn btn-simple btn-just-icon">
                                     <i class="fa fa-reply"></i>
                                 </a>
-                                <a href="#pablo" class="btn btn-simple btn-just-icon">
-                                    <i class="fa fa-twitter"></i>
+                                <a href="#" target="_blank" data-toggle="modal" data-target="#subTaskModal" class="btn btn-simple btn-just-icon">
+                                    <i class="fa fa-plus"></i>
                                 </a>
-                                <a href="#pablo" class="btn btn-simple btn-just-icon">
-                                    <i class="fa fa-google-plus"></i>
-                                </a>
+                                
                             </div>
                         </div>
                         <p class="text-divider">{{todo.state}}</p>
@@ -45,9 +44,10 @@
 		                </div>
 		            </div>
 		        </div>
-                        <div class="footer text-center">
-                            <a href="#pablo" class="btn btn-simple btn-primary btn-lg">{{todo.currentStatus}}</a>
+                        <div   ng-click="update(todo)" class="footer text-center">
+                            <button  ng-style="todo.style"  href="#pablo" class="btn btn-floating btn-primary btn-lg btn-block">{{todo.currentStatus}}</button>
                         </div>
+                        
                     </form>
                 </div>
 
@@ -57,7 +57,7 @@
     </div>
 </div>
 <!--   Core JS Files   -->
->
+
 
 <!-- Control Center for Material Kit: activating the ripples, parallax effects, scripts from the example pages etc -->
 <script src="assets/js/material-kit.js" type="text/javascript"></script>
