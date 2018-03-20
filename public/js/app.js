@@ -26,6 +26,9 @@ app.controller('MainController', function ($scope, $cookieStore, Auth, $http, $s
     console.log(user);
     $scope.formData = {};
     $scope.style = {};
+    
+   
+
 
 
 
@@ -42,6 +45,16 @@ app.controller('MainController', function ($scope, $cookieStore, Auth, $http, $s
             $scope.pager = false;
         }
     })
+
+
+    $scope.setTodo=function(todo){
+
+        
+        $scope.todo=todo;
+        console.log(todo);
+
+    }
+
 
 
     $scope.createTodo = function (todo) {
@@ -157,11 +170,33 @@ app.controller('SubtaskController',function(ToDoService,$scope,$stateParams){
 
     var id=$stateParams.id
 
+    $scope.subtask={};
+
        ToDoService.getTodoById(id).then(function(results){
          
          console.log(results[0])
          $scope.todo=results[0];
      });
+
+
+
+
+     $scope.addsubTask=function(subtask){
+         subtask.val=false;
+         console.log(subtask)
+         var todo=$scope.todo;
+         console.log(todo.subTasks);
+      
+
+
+                todo.subTasks.push(subtask);
+                console.log(todo.subTasks)
+                $scope.subtask = {};
+      
+
+                ToDoService.update(todo); //update post in database
+     }
+     
 
 
 

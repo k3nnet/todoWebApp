@@ -15,10 +15,10 @@
                             <h4>{{todo.runner}}</h4>
                             <p>{{todo.text}}</p>
                             <div class="content">
-                                <a ui-sref="moreDetails" class="btn btn-simple btn-just-icon">
+                                <a ui-sref="moreDetails({id:todo._id})" class="btn btn-simple btn-just-icon" >
                                     <i class="fa fa-reply"></i>
                                 </a>
-                                <a href="#" target="_blank" data-toggle="modal" data-target="#subTaskModal" class="btn btn-simple btn-just-icon">
+                                <a ui-sref="addsubTask({id:todo._id})" class="btn btn-simple btn-just-icon">
                                     <i class="fa fa-plus"></i>
                                 </a>
                                 
@@ -31,13 +31,16 @@
 		                    <div class="title" >
 		                        <h3>Todo</h3>
 		                    </div>
-
+                            <div ng-repeat="subTask in todo.subTasks">
 							<div class="checkbox">
 								<label>
 									<input type="checkbox" name="optionsCheckboxes">
-									Unchecked
+						             {{subTask.text}}
 								</label>
+                                
 							</div>
+                            </div>
+                            
 
 						
 
@@ -45,7 +48,7 @@
 		            </div>
 		        </div>
                         <div   ng-click="update(todo)" class="footer text-center">
-                            <button  ng-style="todo.style"  href="#pablo" class="btn btn-floating btn-primary btn-lg btn-block">{{todo.currentStatus}}</button>
+                            <button  ng-style="todo.style"  href="home" class="btn btn-floating btn-primary btn-lg btn-block">{{todo.currentStatus}}</button>
                         </div>
                         
                     </form>
@@ -55,8 +58,9 @@
         </div>
 
     </div>
+    
 </div>
-<!--   Core JS Files   -->
+
 
 
 <!-- Control Center for Material Kit: activating the ripples, parallax effects, scripts from the example pages etc -->

@@ -94,7 +94,8 @@ app.factory('ToDoService', ['$http', function ($http) {
 
     function createTodo(todo) {
            todo.currentStatus = "DITSENELE";
-            todo.state = "Ditsenele"
+            todo.state = "Ditsenele";
+            todo.runner="Unassigned"
              console.log("form data :" + JSON.stringify(todo))
 
              
@@ -194,7 +195,7 @@ app.factory('ToDoService', ['$http', function ($http) {
             var id = todo._id;
 
             console.log(todo.state);
-            todo.state = "Remove";
+            todo.state = "complete";
             todo.currentStatus = "DONE";
             todo.style = {
                 "background-color": "yellow"

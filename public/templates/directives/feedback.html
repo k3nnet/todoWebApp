@@ -3,7 +3,7 @@
     <h2 class="media-heading text-uppercase reviews"><span class="fa fa-user"></span> {{ todo.runner}}</h2>
 
     <span class="label label-info">{{todo.currentStatus}}</span>
-    <a href="#" target="_blank" data-toggle="modal" data-target="#todoModal"> <span class="label label-info pull-right">view subtasks</span> </a>
+    <a ui-sref="addsubTask({id:todo._id})"> <span class="label label-info pull-right">view subtasks</span> </a>
 
 
     <p style="margin:15px" class="media-comment">
@@ -19,7 +19,7 @@
   </div>
 
   <div id="comment" class="panel-collapse collapse">
-    <textarea class="form-control" ng-model="feedback.content" placeholder="Here can be your nice text" rows="5" cols="40"></textarea>
+    <textarea class="form-control" ng-model="feedback.content" placeholder="feeback" rows="5" cols="40"></textarea>
 
 
     <button type="submit" value="post feedback" ng-click="savefeedback()" class="btn btn-info pull-right">post feedback</button>

@@ -10,8 +10,7 @@ app.config(function($stateProvider,$urlRouterProvider){
           }]
         },
         templateUrl:'templates/home.html',
-        controller:'MainController',
-        controllerAs:'MainController'
+        controller:'MainController'
     }).state('login',{
         url:'/',
         resolve:{
