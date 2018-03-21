@@ -47,6 +47,7 @@ app.get('/api/todos',todo.getToDo);
 app.post('/api/todos',todo.create);
 app.delete('/api/todos/:todo_id',todo.remove);
 app.put('/api/todos/:todo_id',todo.update);
+app.get('/api/done',todo.getDone);
 
 app.post('/api/done',todo.done);
 
