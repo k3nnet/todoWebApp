@@ -1,4 +1,4 @@
-app.directive('feedbacks', function (ToDoService) {
+app.directive('feedbacks', function (ToDoService,$cookieStore) {
     return {
         restrict: 'AE',
         scope: {
@@ -8,12 +8,17 @@ app.directive('feedbacks', function (ToDoService) {
         link: function (scope, elem, attr) {
 
 
+            var user=$cookieStore.get('user');
+
+
             scope.savefeedback = function () {
                 var todoId = scope.todo._id;
 
-
+                console.log(user);
 
                 scope.feedback.datePublished = new Date(); //attach date posted on feedbacks
+                 scope.feedback.user=user.user.username;
+
 
                 console.log(scope.todo.feedbacks)
 

@@ -48,8 +48,20 @@ module.exports = {
         }
         else {
             Todo.find({ _id: req.params.id }).exec(function (err, result) {
+                console.log(result);
 
-                res.send(result);
+                if(result.length!=1){
+
+                    DoneTodos.find({_id:req.params.id}).exec(function(err,result){
+
+                        res.send(result);
+                    })
+
+                }else{
+                    res.send(result);
+                }
+
+               
 
             });
         }
@@ -92,9 +104,11 @@ module.exports = {
     },
 
     done:function(req,res){
+        console.log("++++++++Todo+++++++++++")
+        console.log(req.body);
 
         var done=new DoneTodos(req.body);
-        done.closedDate=new Date();
+        done.completedOn=new Date();
 
         done.save();
 

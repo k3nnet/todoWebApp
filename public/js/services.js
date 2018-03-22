@@ -38,6 +38,7 @@ app.factory('Auth', ['$http', '$cookieStore', function ($http, $cookieStore) {
 }]);
 app.factory('ToDoService', ['$http', function ($http) {
     var todoAddress = '/api/todos/';
+    var doneAddres='api/done';
 
 
     return {
@@ -47,7 +48,8 @@ app.factory('ToDoService', ['$http', function ($http) {
         getTodoById:getTodoById,
         deleteTodo: deleteTodo,
         updateTodo: updateTodo,
-        update:update
+        update:update,
+        getAllDone:getAllDone
 
     }
 
@@ -57,6 +59,29 @@ app.factory('ToDoService', ['$http', function ($http) {
 
 
        return $http.get(todoAddress).then(function (res) {
+
+           
+            console.log(res.data);
+
+            
+                var todos = [];
+                for (var i = 0; i < res.data.length; i++) {
+                    var todo = res.data[i];
+                    var groupedTodo = group(todo);
+                    console.log(groupedTodo);
+                    todos.push(groupedTodo);
+                }
+
+
+            return todos;
+        });
+
+    }
+
+
+    function getAllDone(){
+
+        return $http.get(doneAddres).then(function (res) {
 
            
             console.log(res.data);
@@ -86,6 +111,9 @@ app.factory('ToDoService', ['$http', function ($http) {
               console.log(JSON.stringify(res.data));
             return res.data;
             
+        }).catch(function(err){
+            console.log("error in services")
+            console.log(err);
         })
     }
 
@@ -96,6 +124,7 @@ app.factory('ToDoService', ['$http', function ($http) {
            todo.currentStatus = "DITSENELE";
             todo.state = "Ditsenele";
             todo.runner="Unassigned"
+            todo.created=new Date();
              console.log("form data :" + JSON.stringify(todo))
 
              
@@ -103,22 +132,9 @@ app.factory('ToDoService', ['$http', function ($http) {
                 
                 console.log(res.data);
 
-                var todos = [];
-                for (var i = 0; i < res.data.length; i++) {
-                    var todo = res.data[i];
-                    var groupedTodo = group(todo);
-                    console.log(groupedTodo);
-                    todos.push(groupedTodo);
-                }
+                return res.data;
 
-                if (res.data.length >= 4) {
-                   // $scope.pager = true;
-                }
-                else {
-                   // $scope.pager = false;
-                }
-
-                return todos;
+            
             });
 
 
@@ -132,7 +148,7 @@ app.factory('ToDoService', ['$http', function ($http) {
         if (todo.currentStatus === "DONE") {
             console.log(todo);
                todo.style={
-                   "background-color":"yellow"
+                   "background-color":"#9c27b0"
                 }
             
         } else if (todo.currentStatus === "DITSENELE") {
@@ -174,7 +190,7 @@ app.factory('ToDoService', ['$http', function ($http) {
 
             var id = todo._id;
 
-            todo.state = "Done";
+            todo.state = " ";
             todo.currentStatus = "IN PROGRESS";
             todo.runner=user.name;
             todo.style = {
@@ -195,7 +211,6 @@ app.factory('ToDoService', ['$http', function ($http) {
             var id = todo._id;
 
             console.log(todo.state);
-            todo.state = "complete";
             todo.currentStatus = "DONE";
             todo.style = {
                 "background-color": "yellow"
@@ -227,12 +242,22 @@ app.factory('ToDoService', ['$http', function ($http) {
         var id=todo._id;
 
         console.log(id);
+
+        var doneTodo=todo;
+        console.log("====todo from params======");
+            console.log(todo);
+            console.log("=====todo from done todo=========");
+            console.log(doneTodo);
         
         return $http.delete(todoAddress + id).then(function (res) {
              console.log(res);
             var todos = [];
+            console.log("====todo from params======");
+            console.log(todo);
+            console.log("=====todo from done todo=========");
+            console.log(doneTodo);
 
-              $http.post('/api/done/', todo).then(function (res) {
+              $http.post('/api/done/', doneTodo).then(function (res) {
                 
                 console.log(res.data);
 

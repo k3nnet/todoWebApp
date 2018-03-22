@@ -11,7 +11,7 @@ module.exports=mongoose.model('DoneTodos',{
     subTasks:{
         type:Object
     },
-    closedDate:{
+    completedOn:{
         type:Date
     }
 });

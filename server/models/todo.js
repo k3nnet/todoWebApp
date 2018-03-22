@@ -10,5 +10,8 @@ module.exports=mongoose.model('Todo',{
     },
     subTasks:{
         type:Object
+    }, 
+    created:{
+        type:Date
     }
 });

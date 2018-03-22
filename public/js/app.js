@@ -19,7 +19,7 @@ app.run(['$rootScope', '$state', '$cookieStore', 'Auth', function ($rootScope, $
 }]);
 
 
-app.controller('MainController', function ($scope, $cookieStore, Auth, $http, $state, ToDoService) {
+app.controller('MainController', function ($scope, $cookieStore, Auth, $http, $state,$filter, ToDoService) {
 
 
     var user = $cookieStore.get('user').user;
@@ -28,8 +28,14 @@ app.controller('MainController', function ($scope, $cookieStore, Auth, $http, $s
     $scope.style = {};
     
    
-
-
+ $scope.$watch("todo.tasks", function(n, o) {
+     console.log(o);
+     console.log(n);
+        var trues = $filter("filter")(n, {
+            val: true
+        });
+        $scope.flag = trues.length;
+    }, true);
 
 
     ToDoService.getAllTodos().then(function (results) {
@@ -61,7 +67,12 @@ app.controller('MainController', function ($scope, $cookieStore, Auth, $http, $s
          console.log(todo);
          
         ToDoService.createTodo(todo).then(function (results) {
-              $scope.todos = results;
+
+            results.forEach(function(todo){
+                console.log(todo);
+                $scope.todos.push(todo);
+            })
+             // $scope.todos = results;
               $scope.formData={};
             console.log(results);
         })
@@ -153,6 +164,8 @@ app.controller('MoreDetailsController',function($stateParams,ToDoService,$scope)
 
     console.log($stateParams)
     var id=$stateParams.id;
+    console.log("==============id=========");
+    console.log(id);
 
      ToDoService.getTodoById(id).then(function(results){
          
@@ -182,7 +195,8 @@ app.controller('SubtaskController',function(ToDoService,$scope,$stateParams){
 
 
      $scope.addsubTask=function(subtask){
-         subtask.val=false;
+         subtask.done=false;
+         subtask.closed=new Date();
          console.log(subtask)
          var todo=$scope.todo;
          console.log(todo.subTasks);
@@ -205,4 +219,24 @@ app.controller('SubtaskController',function(ToDoService,$scope,$stateParams){
 
 
 
+})
+
+app.controller('CompletedTodoController',function($scope,ToDoService){
+
+    
+    ToDoService.getAllDone().then(function (results) {
+
+        console.log(results);
+        $scope.todos = results;
+
+
+
+
+        if (results.length >= 4) {
+            $scope.pager = true;
+        }
+        else {
+            $scope.pager = false;
+        }
+    })
 })

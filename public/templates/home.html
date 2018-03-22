@@ -1,64 +1,71 @@
 <div class="section section-basic">
     <div class="container">
-      
+
         <div class="title">
-            <h2>Incomplete Tasks</h2>
+            <h2>Incomplete Tasks ({{todos.length}})</h2>
         </div>
         <div class="row">
 
-            <div ng-repeat="todo in todos|limitTo:10|orderBy:'state'" class="col-md-4 col-md-offset-0">
+            <div ng-repeat="todo in todos|limitTo:10|orderBy:'created'" class="col-md-4 col-md-offset-0">
 
                 <div style="margin-top:70px;" class="card card-signup">
-                    <form class="form" method="" action="">
 
-                        <div class="header header-primary text-center">
-                            <h4>{{todo.runner}}</h4>
-                            <p>{{todo.text}}</p>
-                            <div class="content">
-                                <a ui-sref="moreDetails({id:todo._id})" class="btn btn-simple btn-just-icon" >
-                                    <i class="fa fa-reply"></i>
-                                </a>
-                                <a ui-sref="addsubTask({id:todo._id})" class="btn btn-simple btn-just-icon">
-                                    <i class="fa fa-plus"></i>
-                                </a>
-                                
-                            </div>
-                        </div>
-                        <p class="text-divider">{{todo.state}}</p>
-                       <div id="checkRadios">
-				    <div class="row">
-		                <div class="col-sm-8" style="padding:30px;">
-		                    <div class="title" >
-		                        <h3>Todo</h3>
-		                    </div>
-                            <div ng-repeat="subTask in todo.subTasks">
-							<div class="checkbox">
-								<label>
-									<input type="checkbox" name="optionsCheckboxes">
-						             {{subTask.text}}
-								</label>
-                                
-							</div>
-                            </div>
+
+                    <div class="header header-primary text-center">
+                        <h4>{{todo.runner}}</h4>
+                       
+                        <div class="content">
+                             <p>{{todo.text}}</p>
+                             <a ui-sref="addsubTask({id:todo._id})" class="btn btn-simple btn-just-icon">
+                                <i class="fa fa-plus"></i>
+                            </a>
+                            <a ui-sref="moreDetails({id:todo._id})" class="btn btn-simple btn-just-icon">
+                                <i class="fa fa-reply"></i>
+                            </a>
                             
 
-						
-
-		                </div>
-		            </div>
-		        </div>
-                        <div   ng-click="update(todo)" class="footer text-center">
-                            <button  ng-style="todo.style"  href="home" class="btn btn-floating btn-primary btn-lg btn-block">{{todo.currentStatus}}</button>
                         </div>
-                        
-                    </form>
+                    </div>
+                    <p class="text-divider text-muted">created {{todo.created | date:'MM-dd-yy'}}</p>
+                    <div id="checkRadios">
+                        <div class="row">
+                            <div class="col-sm-8" style="padding:0px 30px;">
+                                <div class="title">
+                                    <h3>Todo</h3>
+                                </div>
+                                <div ng-repeat="subTask in todo.subTasks">
+                                    <div class="checkbox">
+                                        <label>
+                                        <input type="checkbox" name="optionsCheckboxes" >
+                                        {{subTask.text}}
+                                    </label>
+
+                                    </div>
+                                </div>
+                                <div ng-show="todo.subTasks.length==0"  class="title">
+                                    <p>No ToDo subTask at the moment.add a subtask.</p>
+                                </div>
+
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-click="update(todo)" class="footer text-center">
+                        <button ng-style="todo.style" href="home" class="btn btn-floating btn-primary btn-lg btn-block">{{todo.currentStatus}}</button>
+                    </div>
+
                 </div>
 
             </div>
         </div>
+        <div ng-show="todos.length==0" class="title">
+            <h3 class="text-muted">No ToDo Task at the moment.add what needs to be done.</h3>
+        </div>
 
     </div>
-    
+
 </div>
 
 
