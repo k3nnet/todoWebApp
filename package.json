@@ -26,7 +26,12 @@
   },
   "devDependencies": {},
   "scripts": {
+    "start": "node server",
+    "postinstall": "bower install --force",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+   "engines": {
+    "node": "6.10.0"
   },
   "author": "k3nnet",
   "license": "ISC"
