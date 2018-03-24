@@ -19,6 +19,8 @@ app.factory('Auth', ['$http', '$cookieStore', function ($http, $cookieStore) {
             $cookieStore.put('user', auth.user);
 
             return auth.user;
+        }).catch(function(err){
+            console.log(err);
         });
     }
 
@@ -172,10 +174,13 @@ app.factory('ToDoService', ['$http', function ($http) {
     //update todo
 
     function update(todo){
+        console.log(todo);
         return $http.put(todoAddress +todo._id, todo).then(function (res) {
                 console.log(res.data);
 
                 return res.data;
+            }).catch(function(err){
+                console.log(err);
             });
 
     }

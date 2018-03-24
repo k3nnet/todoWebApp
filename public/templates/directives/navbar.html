@@ -30,16 +30,17 @@
 							  <i class="fa fa-plus"></i>Add Todo Task</i>
 						</a>
 					</li>
+                    					<li>
+						<a ui-sref="home" >
+							<i class="fa fa-exclamation-circle"></i>Incomplete Tasks ({{todos.length}})
+						</a>
+					</li>
 					<li>
 						<a ui-sref="completedTodos" >
 							<i class="fa fa-check"></i>Completed Tasks ({{doneTodosCount}})
 						</a>
 					</li>
-					<li>
-						<a ui-sref="home" >
-							<i class="fa fa-exclamation-circle"></i>Incomplete Tasks ({{todo.length}})
-						</a>
-					</li>
+
 					<li>
 						<a ui-sref="" ng-click="logout()" >
 							<i class="fa fa-power-off"></i>signout

@@ -4,18 +4,22 @@ var app = angular.module('Todo', [
     'ngAnimate'
 ]);
 
-app.run(['$rootScope', '$state', '$cookieStore', 'Auth', function ($rootScope, $state, $cookieStore, Auth) {
+app.run(['$transitions', '$state', '$cookieStore', 'Auth', function ($transitions, $state, $cookieStore, Auth) {
 
-    $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
-        console.log(error)
-        if (error.unAuthorized) {
-            $state.go('login');
-        } else if (error.authorized) {
-            $state.go('home');
-        }
-    })
+   Auth.user = $cookieStore.get('user');
 
-    Auth.user = $cookieStore.get('user');
+   $transitions.onBefore({to:'home'},function(transition){
+
+       var auth=transition.injector().get('Auth');
+       console.log("=============TRansitions=============")
+       console.log(auth);
+       if(!auth.user || !auth.user.success ){
+           return transition.router.stateService.target('login');
+       }
+   })
+
+  
+
 }]);
 
 
@@ -84,12 +88,15 @@ app.controller('MainController', function ($scope, $cookieStore, Auth, $http, $s
          
         ToDoService.createTodo(todo).then(function (results) {
 
+            var todos=[];
+
             results.forEach(function(todo){
                 console.log(todo);
-                $scope.todos.push(todo);
+                todos.push(todo);
             })
-             // $scope.todos = results;
-              $scope.formData={};
+             $scope.todos = todos;
+             $state.reload();
+              $scope.todo={};
             console.log(results);
         })
     }
@@ -244,7 +251,7 @@ app.controller('CompletedTodoController',function($scope,ToDoService){
     ToDoService.getAllDone().then(function (results) {
 
         console.log(results);
-        $scope.todos = results;
+        $scope.doneTodos= results;
 
 
 

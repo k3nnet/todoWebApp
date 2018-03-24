@@ -1,4 +1,4 @@
-app.directive('feedbacks', function (ToDoService,$cookieStore) {
+app.directive('feedbacks', function (ToDoService,$cookieStore,$state) {
     return {
         restrict: 'AE',
         scope: {
@@ -9,6 +9,8 @@ app.directive('feedbacks', function (ToDoService,$cookieStore) {
 
 
             var user=$cookieStore.get('user');
+            console.log("==========feedback directive==")
+             console.log(scope.todo)
 
 
             scope.savefeedback = function () {
@@ -28,7 +30,10 @@ app.directive('feedbacks', function (ToDoService,$cookieStore) {
                 scope.feedback = {};
                 var updatedTodo = scope.todo;
 
-                ToDoService.update(updatedTodo); //update post in database
+                ToDoService.update(updatedTodo).then(function(result){
+                    console.log(result)
+                   // $state.reload();
+                }); //update post in database
 
 
 

@@ -1,12 +1,13 @@
+<nav-bar></nav-bar>
 <div class="section section-basic">
     <div class="container">
       
         <div class="title">
-            <h2>complete Tasks  ({{todos.length}})</h2>
+            <h2>complete Tasks  ({{doneTodos.length}})</h2>
         </div>
         <div class="row">
 
-            <div ng-repeat="todo in todos|limitTo:10|orderBy:'closed'" class="col-md-4 col-md-offset-0">
+            <div ng-repeat="todo in doneTodos|limitTo:10|orderBy:'closed'" class="col-md-4 col-md-offset-0">
 
                 <div style="margin-top:70px;" class="card card-signup">
                     <form class="form" method="" action="">
@@ -15,12 +16,13 @@
                             <h4>{{todo.runner}}</h4>
                             <p>{{todo.text}}</p>
                             <div class="content">
+                                 <a ui-sref="addsubTask({id:todo._id})" class="btn btn-simple btn-just-icon">
+                                    <i class="fa fa-plus"></i>
+                                </a>
                                 <a ui-sref="moreDetails({id:todo._id})" class="btn btn-simple btn-just-icon" >
                                     <i class="fa fa-reply"></i>
                                 </a>
-                                <a ui-sref="addsubTask({id:todo._id})" class="btn btn-simple btn-just-icon">
-                                    <i class="fa fa-plus"></i>
-                                </a>
+                               
                                 
                             </div>
                         </div>
