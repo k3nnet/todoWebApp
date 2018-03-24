@@ -1,0 +1,55 @@
+<!-- Navbar -->
+	<nav class="navbar navbar-transparent navbar-fixed-top navbar-color-on-scroll">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-index">
+	        	<span class="sr-only">Toggle navigation</span>
+	        	<span class="icon-bar"></span>
+	        	<span class="icon-bar"></span>
+	        	<span class="icon-bar"></span>
+	    	</button>
+				<a ui-sref="home">
+					<div class="logo-container">
+						<div class="logo">
+							<img src="assets/img/logo.png" alt="Mog Mohsabi"
+								data-placement="bottom" data-html="true">
+						</div>
+						<div class="brand">
+							Mog Moshabi Services
+						</div>
+
+
+					</div>
+				</a>
+			</div>
+
+			<div class="collapse navbar-collapse" id="navigation-index">
+				<ul class="nav navbar-nav navbar-right">
+						<li>
+						<a href="#" target="_blank" data-toggle="modal" data-target="#myModal">
+							  <i class="fa fa-plus"></i>Add Todo Task</i>
+						</a>
+					</li>
+					<li>
+						<a ui-sref="completedTodos" >
+							<i class="fa fa-check"></i>Completed Tasks
+						</a>
+					</li>
+					<li>
+						<a ui-sref="home" >
+							<i class="fa fa-exclamation-circle"></i>Incomplete Tasks
+						</a>
+					</li>
+					<li>
+						<a ui-sref="" ng-click="logout()" >
+							<i class="fa fa-power-off"></i>signout
+						</a>
+					</li>
+				
+				
+
+				</ul>
+			</div>
+		</div>
+	</nav>
+<!-- End Navbar -->
