@@ -54,7 +54,7 @@ app.post('/api/done',todo.done);
 
 // listen (start app with node server.js) ======================================
 
-var server=app.listen(2000,function(){
+var server=app.listen( process.env.PORT || 2000,function(){
 
 	var port=server.address().port;
 	var host=server.address().address;
