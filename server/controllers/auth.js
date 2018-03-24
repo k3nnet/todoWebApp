@@ -7,7 +7,7 @@ var moment = require('moment');
 module.exports =
     {
         register: function (req, res) {
-            console.log(req.body.username);
+           
 
 
 
@@ -46,7 +46,7 @@ module.exports =
         },
 
         login: function (req, res) {
-            console.log(req.body.params)
+          
 
             User.findOne({
                 username: req.body.params.username
@@ -58,11 +58,10 @@ module.exports =
                     res.json({ success: false, message: 'Authentication failed. User not found.' });
                 } else if (user) {
 
-                    console.log(user);
+                   
                 var passwordData=sha512(req.body.params.password,user.salt);
 
-                console.log("userHash= "+user.password);
-                console.log("databapassword= "+passwordData.passwordHash);
+              
 
                 // check if password matches
                 if (user.password != passwordData.passwordHash){

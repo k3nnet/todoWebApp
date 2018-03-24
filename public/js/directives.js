@@ -71,3 +71,13 @@ app.directive('addSubTask', function (ToDoService) {
         }
     }
 })
+
+app.directive('navBar',function(){
+
+    return{
+        restrict:'EA',
+        templateUrl:'templates/directives/navbar.html',
+        controller:'MainController'
+
+    }
+})

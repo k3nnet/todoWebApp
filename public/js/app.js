@@ -88,6 +88,7 @@ app.controller('MainController', function ($scope, $cookieStore, Auth, $http, $s
     $scope.logout = function () {
      
         Auth.logout().then(function(results){
+            console.log("logout");
             $state.go('login');
         })
 
