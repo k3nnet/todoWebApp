@@ -52,6 +52,22 @@ app.controller('MainController', function ($scope, $cookieStore, Auth, $http, $s
         }
     })
 
+    ToDoService.getAllDone().then(function (results) {
+
+        console.log(results);
+        $scope.doneTodosCount = results.length;
+
+
+
+
+        if (results.length >= 4) {
+            $scope.pager = true;
+        }
+        else {
+            $scope.pager = false;
+        }
+    })
+
 
     $scope.setTodo=function(todo){
 
