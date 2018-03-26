@@ -6,35 +6,43 @@ var app = angular.module('Todo', [
 
 app.run(['$transitions', '$state', '$cookieStore', 'Auth', function ($transitions, $state, $cookieStore, Auth) {
 
-   Auth.user = $cookieStore.get('user');
+    Auth.user = $cookieStore.get('user');
 
-   $transitions.onBefore({to:'home'},function(transition){
+    $transitions.onBefore({}, function (transition) {
 
-       var auth=transition.injector().get('Auth');
-       console.log("=============TRansitions=============")
-       console.log(auth);
-       if(!auth.user || !auth.user.success ){
-           return transition.router.stateService.target('login');
-       }
-   })
 
-  
+
+        console.log(transition.to().name);
+        if (!(transition.to().name == 'login')) {
+            var auth = transition.injector().get('Auth');
+            console.log("=============TRansitions=============")
+            console.log(auth);
+            if (!auth.user || !auth.user.success) {
+                return transition.router.stateService.target('login');
+            }
+
+        }
+
+
+    })
+
+
 
 }]);
 
 
-app.controller('MainController', function ($scope, $cookieStore, Auth, $http, $state,$filter, ToDoService) {
+app.controller('MainController', function ($scope, $cookieStore, Auth, $http, $state, $filter, ToDoService) {
 
 
     var user = $cookieStore.get('user').user;
     console.log(user);
     $scope.formData = {};
     $scope.style = {};
-    
-   
- $scope.$watch("todo.tasks", function(n, o) {
-     console.log(o);
-     console.log(n);
+
+
+    $scope.$watch("todo.tasks", function (n, o) {
+        console.log(o);
+        console.log(n);
         var trues = $filter("filter")(n, {
             val: true
         });
@@ -73,10 +81,10 @@ app.controller('MainController', function ($scope, $cookieStore, Auth, $http, $s
     })
 
 
-    $scope.setTodo=function(todo){
+    $scope.setTodo = function (todo) {
 
-        
-        $scope.todo=todo;
+
+        $scope.todo = todo;
         console.log(todo);
 
     }
@@ -84,19 +92,19 @@ app.controller('MainController', function ($scope, $cookieStore, Auth, $http, $s
 
 
     $scope.createTodo = function (todo) {
-         console.log(todo);
-         
+        console.log(todo);
+
         ToDoService.createTodo(todo).then(function (results) {
 
-            var todos=[];
+            var todos = [];
 
-            results.forEach(function(todo){
+            results.forEach(function (todo) {
                 console.log(todo);
                 todos.push(todo);
             })
-             $scope.todos = todos;
-             $state.reload();
-              $scope.todo={};
+            $scope.todos = todos;
+            $state.reload();
+            $scope.todo = {};
             console.log(results);
         })
     }
@@ -109,8 +117,8 @@ app.controller('MainController', function ($scope, $cookieStore, Auth, $http, $s
 
 
     $scope.logout = function () {
-     
-        Auth.logout().then(function(results){
+
+        Auth.logout().then(function (results) {
             console.log("logout");
             $state.go('login');
         })
@@ -127,14 +135,14 @@ app.controller('MainController', function ($scope, $cookieStore, Auth, $http, $s
 
     $scope.update = function (todo) {
 
-        
-        
-        ToDoService.updateTodo(todo,user).then(function(results){
-        
-            if(results instanceof Array){
-               $scope.todos = results;
+
+
+        ToDoService.updateTodo(todo, user).then(function (results) {
+
+            if (results instanceof Array) {
+                $scope.todos = results;
             }
-           
+
         });
 
 
@@ -145,8 +153,8 @@ app.controller('MainController', function ($scope, $cookieStore, Auth, $http, $s
 
     //delete a todo task
 
-    $scope.deleteTodo=function (todo) {
-        ToDoService.deleteTodo(todo).then(function(results){
+    $scope.deleteTodo = function (todo) {
+        ToDoService.deleteTodo(todo).then(function (results) {
             console.log("here");
         })
     }
@@ -184,74 +192,74 @@ app.controller('LoginController', function (Auth, $scope, $state) {
 
 })
 
-app.controller('MoreDetailsController',function($stateParams,ToDoService,$scope){
+app.controller('MoreDetailsController', function ($stateParams, ToDoService, $scope) {
 
     console.log($stateParams)
-    var id=$stateParams.id;
+    var id = $stateParams.id;
     console.log("==============id=========");
     console.log(id);
 
-     ToDoService.getTodoById(id).then(function(results){
-         
-         console.log(results[0])
-         $scope.singleTodo=results[0];
-     });
-    
+    ToDoService.getTodoById(id).then(function (results) {
 
-    $scope.closeTodo=function(id){
+        console.log(results[0])
+        $scope.singleTodo = results[0];
+    });
+
+
+    $scope.closeTodo = function (id) {
         $state.go('home')
     }
 })
 
-app.controller('SubtaskController',function(ToDoService,$scope,$stateParams){
+app.controller('SubtaskController', function (ToDoService, $scope, $stateParams) {
 
-    var id=$stateParams.id
+    var id = $stateParams.id
 
-    $scope.subtask={};
+    $scope.subtask = {};
 
-       ToDoService.getTodoById(id).then(function(results){
-         
-         console.log(results[0])
-         $scope.todo=results[0];
-     });
+    ToDoService.getTodoById(id).then(function (results) {
 
-
-
-
-     $scope.addsubTask=function(subtask){
-         subtask.done=false;
-         subtask.closed=new Date();
-         console.log(subtask)
-         var todo=$scope.todo;
-         console.log(todo.subTasks);
-      
-
-
-                todo.subTasks.push(subtask);
-                console.log(todo.subTasks)
-                $scope.subtask = {};
-      
-
-                ToDoService.update(todo); //update post in database
-     }
-     
+        console.log(results[0])
+        $scope.todo = results[0];
+    });
 
 
 
-    
+
+    $scope.addsubTask = function (subtask) {
+        subtask.done = false;
+        subtask.closed = new Date();
+        console.log(subtask)
+        var todo = $scope.todo;
+        console.log(todo.subTasks);
+
+
+
+        todo.subTasks.push(subtask);
+        console.log(todo.subTasks)
+        $scope.subtask = {};
+
+
+        ToDoService.update(todo); //update post in database
+    }
+
+
+
+
+
 
 
 
 
 })
 
-app.controller('CompletedTodoController',function($scope,ToDoService){
+app.controller('CompletedTodoController', function ($scope, ToDoService) {
 
-    
+
     ToDoService.getAllDone().then(function (results) {
 
         console.log(results);
-        $scope.doneTodos= results;
+        $scope.doneTodos = results;
 
 
 
