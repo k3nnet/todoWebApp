@@ -225,9 +225,27 @@ app.controller('SubtaskController', function (ToDoService, $scope, $stateParams)
 
 
 
+    $scope.selected=function(task){
+
+        console.log(task);
+
+        if(task.done){
+            task.done=false;
+        }else{
+            task.done=true;
+        }
+
+       
+
+
+
+    }
+
+
+
 
     $scope.addsubTask = function (subtask) {
-        subtask.done = false;
+        subtask.done = true;
         subtask.closed = new Date();
         console.log(subtask)
         var todo = $scope.todo;

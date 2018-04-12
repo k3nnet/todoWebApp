@@ -1,4 +1,5 @@
 module.exports={
     secret:"any text in here",
-    database:"mongodb://k3nnetmlab:k3nnet@ds123399.mlab.com:23399/mogtodo"
+    database:"mongodb://k3nnetmlab:k3nnet@ds123399.mlab.com:23399/mogtodo",
+    databaseTest:"mongodb://localhost:27017/Todo"
 }

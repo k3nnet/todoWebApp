@@ -21,7 +21,7 @@
                                 <i class="fa fa-plus"></i>
                             </a>
                             <a ui-sref="moreDetails({id:todo._id})" class="btn btn-simple btn-just-icon">
-                                <i class="fa fa-reply"></i>
+                                <i class="fa fa-reply"></i>({{todo.feedbacks.length}})
                             </a>
                             
 
@@ -34,11 +34,13 @@
                                 <div class="title">
                                     <h3>Todo</h3>
                                 </div>
+                                
                                 <div ng-repeat="subTask in todo.subTasks">
                                     <div class="checkbox">
                                         <label>
-                                        <input type="checkbox" name="optionsCheckboxes" >
+                                        <input type="checkbox" ng-click="selected(todo)" ng-checked=" {{subTask.done}}" name="optionsCheckboxes" >
                                         {{subTask.text}}
+                                          
                                     </label>
 
                                     </div>

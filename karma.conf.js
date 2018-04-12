@@ -1,7 +1,7 @@
 // Karma configuration
-// Generated on Fri Mar 16 2018 10:43:55 GMT+0200 (South Africa Standard Time)
+// Generated on Wed Mar 28 2018 23:47:04 GMT+0200 (South Africa Standard Time)
 
-module.exports = function (config) {
+module.exports = function(config) {
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
@@ -15,14 +15,6 @@ module.exports = function (config) {
 
     // list of files / patterns to load in the browser
     files: [
-      "./node_modules/angular/angular.min.js",
-      "./node_modules/angular-mocks/angular-mocks.js",
-        "./public/js/app.js",
-        "./public/js/test/*.js",
-
-    
-
-
     ],
 
 
