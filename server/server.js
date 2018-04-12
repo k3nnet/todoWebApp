@@ -14,7 +14,7 @@ var cors=require('./cors');
 
 
 //configuration ================
-mongoose.connect(config.databaseTest);
+mongoose.connect(config.database);
 
 app.use(express.static(__dirname + '/public'));                 
                                         
